@@ -42,7 +42,7 @@
               <div class="image-container">
                 <img
                   :alt="picture.name"
-                  :src="picture.url"
+                  :src="picture.thumbnailUrl ?? picture.url"
                   class="image"
                 />
                 <div class="overlay">
@@ -72,13 +72,13 @@
 
 <script setup lang="ts">
 import { computed, onMounted, reactive, ref } from 'vue'
-import {
-  listPictureTagCategoryUsingGet,
-  listPictureVoByPageUsingPost,
-} from '@/api/pictureController.ts'
 import { message } from 'ant-design-vue'
 import { useRouter } from 'vue-router'
 import router from '@/router'
+import {
+  listPictureTagCategoryUsingGet,
+  listPictureVoByPageWithCacheUsingPost
+} from '@/api/pictureController.ts'
 
 // 定义数据
 const dataList = ref<API.PictureVO[]>([])
@@ -109,7 +109,7 @@ const fetchData = async () => {
       params.tags.push(tagList.value[index])
     }
   })
-  const res = await listPictureVoByPageUsingPost(params)
+  const res = await listPictureVoByPageWithCacheUsingPost(params)
   if (res.data.code === 0 && res.data.data) {
     dataList.value = res.data.data.records ?? []
     total.value = res.data.data.total ?? 0
@@ -130,9 +130,16 @@ const pagination = computed(() => {
     current: searchParams.current,
     pageSize: searchParams.pageSize,
     total: total.value,
+    pageSizeOptions: ['12', '20'], // 设置分页数量选项
+    showSizeChanger: true, // 显示分页数量选择器
     onChange: (page: number, pageSize: number) => {
       searchParams.current = page
       searchParams.pageSize = pageSize
+      fetchData()
+    },
+    onShowSizeChange: (current: number, size: number) => {
+      searchParams.current = 1 // 切换分页数量时重置到第一页
+      searchParams.pageSize = size
       fetchData()
     },
   }

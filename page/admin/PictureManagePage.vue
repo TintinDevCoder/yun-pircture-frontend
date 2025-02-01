@@ -95,6 +95,7 @@ import {
   PIC_REVIEW_STATUS_MAP,
   PIC_REVIEW_STATUS_OPTIONS
 } from '@/constants/picture.ts'
+import router from '@/router'
 
 const columns = [
   {
@@ -264,4 +265,9 @@ const handleReviewCancel = () => {
   currentReviewRecord.value = null
   currentReviewStatus.value = null // 清空审核状态
 }
+/*const picture = ref<API.PictureVO>({})
+// 编辑
+const doEdit = () => {
+  router.push('/add_picture?id=' + picture.value.id)
+}*/
 </script>

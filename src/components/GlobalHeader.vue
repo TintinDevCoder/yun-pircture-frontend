@@ -30,6 +30,12 @@
                   <EditOutlined />
                   编辑个人信息
                 </a-menu-item>
+                <a-menu-item>
+                  <router-link to="/my_space">
+                    <UserOutlined />
+                    我的空间
+                  </router-link>
+                </a-menu-item>
                 <a-menu-item @click="doLogout">
                   <LogoutOutlined />
                   退出登录
@@ -63,7 +69,7 @@
 
 <script lang="ts" setup>
 import { computed, h, reactive, ref } from 'vue'
-import { HomeOutlined, LogoutOutlined, EditOutlined } from '@ant-design/icons-vue';
+import { HomeOutlined, LogoutOutlined, EditOutlined,UserOutlined } from '@ant-design/icons-vue';
 import { MenuProps, message } from 'ant-design-vue';
 import { useRouter } from 'vue-router';
 import { useLoginUserStore } from '@/stores/useLoginUserStore.ts';
@@ -92,9 +98,14 @@ const originItems = [
     title: '用户管理',
   },
   {
+    key: '/admin/spaceManage',
+    label: '空间管理',
+    title: '空间管理',
+  },
+  {
     key: 'others',
-    label: h('a', { href: 'https://www.codefather.cn', target: '_blank' }, '编程导航'),
-    title: '编程导航',
+    label: h('a', { href: 'https://github.com/TintinDevCoder', target: '_blank' }, '关于作者'),
+    title: '关于作者',
   },
 ];
 

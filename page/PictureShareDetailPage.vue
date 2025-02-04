@@ -59,6 +59,9 @@
                 />
               </a-space>
             </a-descriptions-item>
+            <a-descriptions-item label="图片保存次数">
+              {{ picture.saveNum ?? '-' }}
+            </a-descriptions-item>
           </a-descriptions>
           <!-- 图片操作 -->
           <a-space wrap>
@@ -97,7 +100,7 @@ interface Props {
 }
 
 const props = defineProps<Props>()
-const picture = ref<API.PictureVO>({})
+const picture = ref<API.SharePictureVO>({})
 
 const loginUserStore = useLoginUserStore()
 

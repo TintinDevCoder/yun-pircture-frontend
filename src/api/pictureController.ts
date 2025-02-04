@@ -61,7 +61,7 @@ export async function getPictureVoBySharePictureIdUsingGet(
   params: API.getPictureVOBySharePictureIdUsingGETParams,
   options?: { [key: string]: any }
 ) {
-  return request<API.BaseResponsePictureVO_>('/api/picture/get/share/vo', {
+  return request<API.BaseResponseSharePictureVO_>('/api/picture/get/share/vo', {
     method: 'GET',
     params: {
       ...params,

@@ -83,6 +83,12 @@ declare namespace API {
     message?: string
   }
 
+  type BaseResponseSharePictureVO_ = {
+    code?: number
+    data?: SharePictureVO
+    message?: string
+  }
+
   type BaseResponseSpace_ = {
     code?: number
     data?: Space
@@ -340,6 +346,28 @@ declare namespace API {
   type setSharePictureByIdUsingPOSTParams = {
     /** url */
     url: string
+  }
+
+  type SharePictureVO = {
+    category?: string
+    createTime?: string
+    editTime?: string
+    id?: number
+    introduction?: string
+    isDelete?: number
+    name?: string
+    picColor?: string
+    picFormat?: string
+    picHeight?: number
+    picScale?: number
+    picSize?: number
+    picWidth?: number
+    saveNum?: number
+    tags?: string
+    updateTime?: string
+    url?: string
+    user?: UserVO
+    userId?: number
   }
 
   type Space = {

@@ -28,6 +28,10 @@
         </a-checkable-tag>
       </a-space>
     </div>
+    <!-- 按颜色搜索，跟其他搜索条件独立 -->
+    <a-form-item label="按颜色搜索">
+      <color-picker format="hex" @pureColorChange="onColorChange" />
+    </a-form-item>
     <!-- 图片列表 -->
     <PictureList :dataList="dataList" :loading="loading" />
     <!-- 分页 -->
@@ -48,9 +52,15 @@ import { useRouter } from 'vue-router'
 import router from '@/router'
 import {
   listPictureTagCategoryUsingGet,
-  listPictureVoByPageWithCacheUsingPost
+  listPictureVoByPageWithCacheUsingPost,
+  searchPictureByColorUsingPost,
+  searchPublicPictureByColorUsingPost
 } from '@/api/pictureController.ts'
 import PictureList from '@/components/PictureList.vue'
+import PictureSearchForm from '@/components/PictureSearchForm.vue'
+import { ColorPicker } from 'vue3-colorpicker'
+import _default from 'ant-design-vue/es/vc-slick/inner-slider'
+import props = _default.props
 
 // 定义数据
 const dataList = ref<API.PictureVO[]>([])
@@ -128,6 +138,21 @@ const getTagCategoryOptions = async () => {
 onMounted(() => {
   getTagCategoryOptions()
 })
+// 按照颜色搜索
+const onColorChange = async (color: string) => {
+  loading.value = true
+  const res = await searchPublicPictureByColorUsingPost({
+    picColor: color,
+  })
+  if (res.data.code === 0 && res.data.data) {
+    const data = res.data.data ?? []
+    dataList.value = data
+    total.value = data.length
+  } else {
+    message.error('获取数据失败，' + res.data.message)
+  }
+  loading.value = false
+}
 </script>
 
 <style scoped>

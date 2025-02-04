@@ -1,7 +1,7 @@
 <template>
   <div id="pictureManagePage">
     <a-flex justify="space-between">
-      <h2>图片管理</h2>
+      <h2 style="text-align: center; flex: 1;">图片管理</h2> <!-- 标题居中 -->
       <a-space>
         <a-button type="primary" href="/add_picture" target="_blank">+ 创建图片</a-button>
         <a-button type="primary" href="/add_picture/batch" target="_blank" ghost>+ 批量创建图片</a-button>
@@ -31,7 +31,7 @@
     <a-table :columns="columns" :data-source="dataList" :pagination="pagination" @change="doTableChange">
       <template #bodyCell="{ column, record }">
         <template v-if="column.dataIndex === 'url'">
-          <a-image :src="record.url" :width="120" />
+          <a-image :src="record.url" :width="150" /> <!-- 图片列加宽 -->
         </template>
         <template v-if="column.dataIndex === 'tags'">
           <a-space wrap>
@@ -102,57 +102,71 @@ const columns = [
     title: 'id',
     dataIndex: 'id',
     width: 80,
+    align: 'center', // 居中对齐
   },
   {
     title: '图片',
     dataIndex: 'url',
+    width: 150, // 图片列加宽
+    align: 'center', // 居中对齐
   },
   {
     title: '名称',
     dataIndex: 'name',
+    align: 'center', // 居中对齐
   },
   {
     title: '简介',
     dataIndex: 'introduction',
     ellipsis: true,
+    align: 'center', // 居中对齐
   },
   {
     title: '类型',
     dataIndex: 'category',
+    align: 'center', // 居中对齐
   },
   {
     title: '标签',
     dataIndex: 'tags',
+    align: 'center', // 居中对齐
   },
   {
     title: '图片信息',
     dataIndex: 'picInfo',
+    align: 'center', // 居中对齐
   },
   {
     title: '用户 id',
     dataIndex: 'userId',
     width: 80,
+    align: 'center', // 居中对齐
   },
   {
     title: '空间 id',
     dataIndex: 'spaceId',
     width: 80,
+    align: 'center', // 居中对齐
   },
   {
     title: '审核信息',
     dataIndex: 'reviewMessage',
+    align: 'center', // 居中对齐
   },
   {
     title: '创建时间',
     dataIndex: 'createTime',
+    align: 'center', // 居中对齐
   },
   {
     title: '编辑时间',
     dataIndex: 'editTime',
+    align: 'center', // 居中对齐
   },
   {
     title: '操作',
     key: 'action',
+    align: 'center', // 居中对齐
   },
 ]
 

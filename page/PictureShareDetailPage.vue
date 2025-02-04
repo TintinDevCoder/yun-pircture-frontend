@@ -3,16 +3,8 @@
     <a-row :gutter="[16, 16]">
       <!-- 图片预览 -->
       <a-col :sm="24" :md="16" :xl="18">
-        <a-card>
-          <template #title>
-            <span>图片预览</span>
-            <a-button type="default" @click="goBack" style="float: right;">
-              返回
-            </a-button>
-          </template>
-          <div class="image-container">
-            <a-image :src="picture.url" style="max-height: 600px; object-fit: contain" />
-          </div>
+        <a-card title="图片分享">
+          <a-image :src="picture.url" style="max-height: 600px; object-fit: contain" />
         </a-card>
       </a-col>
       <!-- 图片信息区域 -->
@@ -76,32 +68,29 @@
                 <DownloadOutlined />
               </template>
             </a-button>
-            <a-button :icon="h(ShareAltOutlined)" type="primary" ghost @click="doShare">
-              分享
-            </a-button>
-            <a-button v-if="canEdit" :icon="h(EditOutlined)" type="default" @click="doEdit">
-              编辑
-            </a-button>
-            <a-button v-if="canEdit" :icon="h(DeleteOutlined)" danger @click="doDelete">
-              删除
+            <a-button type="default" @click="saveToPersonalSpace">
+              保存到个人空间
             </a-button>
           </a-space>
         </a-card>
       </a-col>
     </a-row>
-    <ShareModal ref="shareModalRef" :link="shareLink" />
   </div>
 </template>
 
 <script setup lang="ts">
 import { computed, h, onMounted, ref } from 'vue'
-import { deletePictureUsingPost, getPictureVoByIdUsingGet } from '@/api/pictureController.ts'
+import {
+  deletePictureUsingPost,
+  getPictureVoBySharePictureIdUsingGet, saveSharePictureUsingPost, setSharePictureByIdUsingPost
+} from '@/api/pictureController.ts'
 import { message } from 'ant-design-vue'
-import {DeleteOutlined, DownloadOutlined, EditOutlined, ShareAltOutlined} from '@ant-design/icons-vue'
+import {DownloadOutlined} from '@ant-design/icons-vue'
 import { useLoginUserStore } from '@/stores/useLoginUserStore.ts'
 import { useRouter } from 'vue-router'
 import {downloadImage, formatSize, toHexColor} from '@/utils'
 import ShareModal from "@/components/ShareModal.vue";
+import * as url from 'node:url'
 
 interface Props {
   id: string | number
@@ -127,7 +116,7 @@ const canEdit = computed(() => {
 // 获取图片详情
 const fetchPictureDetail = async () => {
   try {
-    const res = await getPictureVoByIdUsingGet({
+    const res = await getPictureVoBySharePictureIdUsingGet({
       id: props.id,
     })
     if (res.data.code === 0 && res.data.data) {
@@ -145,51 +134,27 @@ onMounted(() => {
 })
 
 const router = useRouter()
-// 返回上一页
-const goBack = () => {
-  router.go(-1) // 返回到上一页
-}
-// 编辑
-const doEdit = () => {
-  router.push({
-    path: '/add_picture',
-    query: {
-      id: picture.value.id,
-      spaceId: picture.value.spaceId,
-    },
-  })
-}
-
-// 删除数据
-const doDelete = async () => {
-  const id = picture.value.id
-  if (!id) {
-    return
-  }
-  const res = await deletePictureUsingPost({ id })
-  if (res.data.code === 0) {
-    message.success('删除成功')
-  } else {
-    message.error('删除失败')
-  }
-}
 
 // 下载图片
 const doDownload = () => {
   downloadImage(picture.value.url)
 }
 
-// ----- 分享操作 ----
-const shareModalRef = ref()
-// 分享链接
-const shareLink = ref<string>()
-// 分享
-const doShare = () => {
-  shareLink.value = `${window.location.protocol}//${window.location.host}/picture/${picture.value.id}`
-  if (shareModalRef.value) {
-    shareModalRef.value.openModal()
+// 保存到个人空间的方法
+const saveToPersonalSpace = async () => { // 将函数声明为 async
+  const id = picture.value.id;
+  const res = await saveSharePictureUsingPost({
+    id: id
+  });
+  // 处理响应 res
+  if (res.data.code === 0) {
+    message.success('保存成功')
+  } else {
+    message.error('保存失败：' + res.data.message)
   }
-}
+// 跳转到 /my_space 路由
+  router.push('/my_space');
+};
 </script>
 
 <style scoped>

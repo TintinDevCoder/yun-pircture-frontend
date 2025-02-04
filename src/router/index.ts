@@ -13,6 +13,7 @@ import AddSpacePage from '../../page/AddSpacePage.vue'
 import MySpacePage from '../../page/MySpacePage.vue'
 import SpaceDetailPage from '../../page/SpaceDetailPage.vue'
 import SearchPicturePage from '../../page/SearchPicturePage.vue'
+import PictureShareDetailPage from '../../page/PictureShareDetailPage.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -64,6 +65,12 @@ const router = createRouter({
       path: '/picture/:id',
       name: '图片详情',
       component: PictureDetailPage,
+      props: true,
+    },
+    {
+      path: '/picture/share/:id',
+      name: '分享图片详情',
+      component: PictureShareDetailPage,
       props: true,
     },
     {

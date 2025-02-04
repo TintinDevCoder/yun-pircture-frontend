@@ -133,6 +133,11 @@ declare namespace API {
     id: number
   }
 
+  type getPictureVOBySharePictureIdUsingGETParams = {
+    /** id */
+    id: number
+  }
+
   type getSpaceByIdUsingGETParams = {
     /** id */
     id: number
@@ -313,6 +318,11 @@ declare namespace API {
     userId?: number
   }
 
+  type saveSharePictureUsingPOSTParams = {
+    /** id */
+    id: number
+  }
+
   type SearchPictureByColorRequest = {
     picColor?: string
     spaceId?: number
@@ -325,6 +335,11 @@ declare namespace API {
   type searchPublicPictureByColorUsingPOSTParams = {
     /** picColor */
     picColor?: string
+  }
+
+  type setSharePictureByIdUsingPOSTParams = {
+    /** url */
+    url: string
   }
 
   type Space = {

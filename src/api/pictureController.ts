@@ -55,6 +55,21 @@ export async function getPictureByIdUsingGet(
   })
 }
 
+/** getPictureVOBySharePictureId GET /api/picture/get/share/vo */
+export async function getPictureVoBySharePictureIdUsingGet(
+  // 叠加生成的Param类型 (非body参数swagger默认没有生成对象)
+  params: API.getPictureVOBySharePictureIdUsingGETParams,
+  options?: { [key: string]: any }
+) {
+  return request<API.BaseResponsePictureVO_>('/api/picture/get/share/vo', {
+    method: 'GET',
+    params: {
+      ...params,
+    },
+    ...(options || {}),
+  })
+}
+
 /** getPictureVOById GET /api/picture/get/vo */
 export async function getPictureVoByIdUsingGet(
   // 叠加生成的Param类型 (非body参数swagger默认没有生成对象)
@@ -145,6 +160,21 @@ export async function doPictureReviewUsingPost(
   })
 }
 
+/** saveSharePicture POST /api/picture/save/share */
+export async function saveSharePictureUsingPost(
+  // 叠加生成的Param类型 (非body参数swagger默认没有生成对象)
+  params: API.saveSharePictureUsingPOSTParams,
+  options?: { [key: string]: any }
+) {
+  return request<API.BaseResponseBoolean_>('/api/picture/save/share', {
+    method: 'POST',
+    params: {
+      ...params,
+    },
+    ...(options || {}),
+  })
+}
+
 /** searchPictureByColor POST /api/picture/search/color */
 export async function searchPictureByColorUsingPost(
   body: API.SearchPictureByColorRequest,
@@ -171,6 +201,21 @@ export async function searchPictureByPictureUsingPost(
       'Content-Type': 'application/json',
     },
     data: body,
+    ...(options || {}),
+  })
+}
+
+/** setSharePictureById POST /api/picture/set/share */
+export async function setSharePictureByIdUsingPost(
+  // 叠加生成的Param类型 (非body参数swagger默认没有生成对象)
+  params: API.setSharePictureByIdUsingPOSTParams,
+  options?: { [key: string]: any }
+) {
+  return request<API.BaseResponseBoolean_>('/api/picture/set/share', {
+    method: 'POST',
+    params: {
+      ...params,
+    },
     ...(options || {}),
   })
 }

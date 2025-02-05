@@ -196,4 +196,15 @@ const doShare = () => {
 #pictureDetailPage {
   margin-bottom: 16px;
 }
+#pictureDetailPage {
+  margin-bottom: 16px;
+}
+
+.image-container {
+  display: flex;            /* 设置为 Flexbox */
+  justify-content: center;  /* 水平居中 */
+  align-items: center;      /* 垂直居中 */
+  height: 100%;             /* 根据需要设置高度 */
+  max-height: 600px;       /* 限制最大高度 */
+}
 </style>

@@ -145,6 +145,39 @@ export async function listPictureVoByPageWithCacheUsingPost(
   })
 }
 
+/** createPictureOutPaintingTask POST /api/picture/out_pating/create_task */
+export async function createPictureOutPaintingTaskUsingPost(
+  body: API.CreatePictureOutPaintingTaskRequest,
+  options?: { [key: string]: any }
+) {
+  return request<API.BaseResponseCreateOutPaintingTaskResponse_>(
+    '/api/picture/out_pating/create_task',
+    {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      data: body,
+      ...(options || {}),
+    }
+  )
+}
+
+/** getPictureOutPaintingTask GET /api/picture/out_pating/get_task */
+export async function getPictureOutPaintingTaskUsingGet(
+  // 叠加生成的Param类型 (非body参数swagger默认没有生成对象)
+  params: API.getPictureOutPaintingTaskUsingGETParams,
+  options?: { [key: string]: any }
+) {
+  return request<API.BaseResponseGetOutPaintingTaskResponse_>('/api/picture/out_pating/get_task', {
+    method: 'GET',
+    params: {
+      ...params,
+    },
+    ...(options || {}),
+  })
+}
+
 /** searchPublicPictureByColor POST /api/picture/public/search/color */
 export async function searchPublicPictureByColorUsingPost(
   // 叠加生成的Param类型 (非body参数swagger默认没有生成对象)

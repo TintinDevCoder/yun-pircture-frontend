@@ -85,22 +85,33 @@ const handleSubmit = async (values: any) => {
       id: spaceId,
       ...spaceForm,
     })
+    // 操作成功
+    if (res.data.code === 0 && res.data.data) {
+      message.success('操作成功')
+      // 跳转到空间详情页
+      router.push({
+        path: `/admin/spaceManage`,
+      })
+    } else {
+      message.error('操作失败，' + res.data.message)
+    }
   } else {
     // 创建
     res = await addSpaceUsingPost({
       ...spaceForm,
     })
+    // 操作成功
+    if (res.data.code === 0 && res.data.data) {
+      message.success('操作成功')
+      // 跳转到空间详情页
+      router.push({
+        path: `/space/${res.data.data}`,
+      })
+    } else {
+      message.error('操作失败，' + res.data.message)
+    }
   }
-  // 操作成功
-  if (res.data.code === 0 && res.data.data) {
-    message.success('操作成功')
-    // 跳转到空间详情页
-    router.push({
-      path: `/space/${res.data.data}`,
-    })
-  } else {
-    message.error('操作失败，' + res.data.message)
-  }
+
   loading.value = false
 }
 

@@ -83,31 +83,38 @@ const columns = [
   {
     title: '空间名称',
     dataIndex: 'spaceName',
+    align: 'center', // 居中对齐
   },
   {
     title: '空间级别',
     dataIndex: 'spaceLevel',
+    align: 'center', // 居中对齐
   },
   {
     title: '使用情况',
     dataIndex: 'spaceUseInfo',
+    align: 'center', // 居中对齐
   },
   {
     title: '用户 id',
     dataIndex: 'userId',
     width: 80,
+    align: 'center', // 居中对齐
   },
   {
     title: '创建时间',
     dataIndex: 'createTime',
+    align: 'center', // 居中对齐
   },
   {
     title: '编辑时间',
     dataIndex: 'editTime',
+    align: 'center', // 居中对齐
   },
   {
     title: '操作',
     key: 'action',
+    align: 'center', // 居中对齐
   },
 ]
 

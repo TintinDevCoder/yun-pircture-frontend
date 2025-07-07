@@ -13,7 +13,7 @@
           + 创建图片
         </a-button>
         <a-button
-          v-if="canManageSpaceUser"
+          v-if="space.spaceType == 1 && canManageSpaceUser"
           type="primary"
           ghost
           :icon="h(TeamOutlined)"

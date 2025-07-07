@@ -186,6 +186,8 @@ const handleEdit = async () => {
   if (res.data.code === 0) {
     message.success('个人信息更新成功');
     updateLoginUser();
+    // 刷新整个网页
+    window.location.reload();
   }else {
     message.error(res.data.message);
   }

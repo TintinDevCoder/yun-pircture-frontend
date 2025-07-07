@@ -73,7 +73,11 @@ import { HomeOutlined, LogoutOutlined, EditOutlined,UserOutlined } from '@ant-de
 import { MenuProps, message } from 'ant-design-vue';
 import { useRouter } from 'vue-router';
 import { useLoginUserStore } from '@/stores/useLoginUserStore.ts';
-import { userLogoutUsingPost } from '@/api/userController.ts';
+import {
+  updateEditSelfUsingPost,
+  updateUserUsingPost,
+  userLogoutUsingPost
+} from '@/api/userController.ts'
 
 const originItems = [
   {
@@ -177,10 +181,30 @@ const doEditProfile = () => {
 // 处理编辑提交
 const handleEdit = async () => {
   // 处理编辑逻辑，例如调用 API 更新用户信息
-  // const res = await updateUserUsingPost(editUserData);
+  const res = await updateEditSelfUsingPost(editUserData);
   // 处理返回结果
-  message.success('个人信息更新成功');
+  if (res.data.code === 0) {
+    message.success('个人信息更新成功');
+    updateLoginUser();
+  }else {
+    message.error(res.data.message);
+  }
+
   isEditModalVisible.value = false;
+};
+const updateLoginUser = () => {
+  if (editUserData.userName) {
+    loginUserStore.loginUser.userName = editUserData.userName;
+  }
+  if (editUserData.userAvatar) {
+    editUserData.userAvatar = editUserData.userAvatar;
+  }
+  if (editUserData.userProfile) {
+    editUserData.userProfile = editUserData.userProfile;
+  }
+  if (editUserData.userRole) {
+    editUserData.userRole = editUserData.userRole;
+  }
 };
 </script>
 

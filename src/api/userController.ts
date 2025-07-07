@@ -131,3 +131,18 @@ export async function updateUserUsingPost(
     ...(options || {}),
   })
 }
+
+/** updateUser POST /api/user/update */
+export async function updateEditSelfUsingPost(
+  body: API.UserUpdateDTO,
+  options?: { [key: string]: any }
+) {
+  return request<API.BaseResponseBoolean_>('/api/user/editself', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    data: body,
+    ...(options || {}),
+  })
+}

@@ -57,6 +57,9 @@ const handleSubmit = async (values: any) => {
       <a-form-item>
         <a-button type="primary" html-type="submit" style="width: 100%">登录</a-button>
       </a-form-item>
+      <div style="display: flex; justify-content: center; width: 100%;">
+        <p style="color: gray; font-size: 16px; font-weight: bold; margin: 0;">测试系统账号：root/12345678</p>
+      </div>
     </a-form>
   </div>
 </template>
